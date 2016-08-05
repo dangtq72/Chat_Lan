@@ -1,0 +1,435 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="Nvs_Monitor.Themes.Dark.MainWindow">
+
+    <Style x:Key="MainCombine" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <!--<EventSetter Event="Loaded" Handler="Main_Loaded"/>-->
+        <!--<Setter Property="MaxWidth"
+                Value="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidth}}"/>
+        <Setter Property="MaxHeight"
+                Value="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeight}}"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border Name="MainBorder" Background="#FFFFFF" BorderBrush="#FF999999" BorderThickness="1" CornerRadius="0" Margin="0" 
+                            Padding="0" UseLayoutRounding="True" >
+                        <Grid Background="#FFFFFF" Margin="0,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="0"/>
+                            </Grid.RowDefinitions>
+
+                            <!--title-->
+                            <Grid  Grid.Row="0" MouseLeftButtonDown="Title_MouseLeftButtonDown" Background="#000" Panel.ZIndex="9">
+                                <Grid.ColumnDefinitions >
+                                    <!--<ColumnDefinition Width ="220"/>-->
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="2"
+                                       MouseDoubleClick="DoubleClick" Background="Transparent" Panel.ZIndex="5"/>
+
+                                <!--<StackPanel Grid.Column="0" Orientation="Horizontal" Panel.ZIndex="6">
+                                    <ToggleButton Content="Hệ thống" Name="btnSystem" Width="70" Style="{DynamicResource ToggleBtnMainWindow}" VerticalAlignment="Stretch" 
+                                                  IsChecked="True" IsHitTestVisible="False" Focusable="False"/>
+                                    <ToggleButton Content="HNX Index" Name="btnIndex" Width="80" Style="{DynamicResource ToggleBtnMainWindow}" VerticalAlignment="Stretch"/>
+                                    <ToggleButton Content="HNX ETF" Name="btnETF" Width="75" Style="{DynamicResource ToggleBtnMainWindow}" VerticalAlignment="Stretch"/>
+                                </StackPanel>-->
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Panel.ZIndex="6" Margin="10,0,0,0">
+                                    <!--<Image Source="/FrontEndDemo;component/Images/Market.png" Width="25" Height="25"/>-->
+                                    <TextBlock Text="{TemplateBinding Title}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="5,0,0,0" 
+                                               VerticalAlignment="Center" FontFamily="400-Arial" FontSize="17" Foreground="#fff" />
+                                </StackPanel>
+
+                                <Grid Grid.Column="2"  Width="77" HorizontalAlignment="Right" VerticalAlignment="Center" Panel.ZIndex="6">
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0"
+                                            Click="Minimize_Click" VerticalContentAlignment="Center" ToolTip="Minimize" Style="{DynamicResource MinimizeStyle}"/>
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,0,0,0"
+                                            Click="Maximize_Click" VerticalContentAlignment="Center" ToolTip="Maximize" Style="{DynamicResource MaximizeStyle}"/>
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="48,0,0,0"
+                                            Click="ButtonOnClick" VerticalContentAlignment="Center" ToolTip="Close" Style="{DynamicResource MainCloseStyle}"/>
+                                </Grid>
+                            </Grid>
+
+                            <!--window content-->
+                            <Grid Grid.Row="1" Background="#FFFFFF">
+                                <Border  Padding="0,0,0,0" Background="Transparent" >
+                                    <Border BorderBrush="White"  BorderThickness="0" Padding="0">
+                                        <AdornerDecorator>
+                                            <ContentPresenter/>
+                                        </AdornerDecorator>
+                                    </Border>
+                                </Border>
+                                <ResizeGrip x:Name="WindowResizeGrip" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                            Visibility="Hidden" Margin="0" Style="{DynamicResource ResizeGripStyle}"/>
+                            </Grid>
+
+                            <!--bottom-->
+                            <ContentPresenter Grid.Row="2" Margin="0" HorizontalAlignment="Center" Content="{TemplateBinding Tag}"/>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                            <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--=============================================================================================================-->
+    <!--btn close-->
+    <Style x:Key="MainCloseStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <BulletDecorator>
+                        <BulletDecorator.Bullet>
+                            <Grid Background="Transparent">
+                                <Border x:Name="BorderClose" Background="Transparent" BorderThickness="1" CornerRadius="0" BorderBrush="#FF969A9D" 
+                                        Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Opacity="0"/>
+                                <Path Visibility="Visible" Width="9" Height="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      SnapsToDevicePixels="True" StrokeThickness="1" Stroke="#fff" 
+                                      Data="M 0 0 L 9 9 M 0 9 L 9 0" UseLayoutRounding="True">
+                                </Path>
+                                <Path Visibility="Visible" Width="9" Height="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      x:Name="xClose" SnapsToDevicePixels="True" StrokeThickness="1" Stroke="#fff" 
+                                      Data="M 0 0 L 9 9 M 0 9 L 9 0" UseLayoutRounding="True" >
+                                </Path>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="xClose" Property="Stroke" Value="#FFE52020"/>
+                            <Setter TargetName="BorderClose" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <!--<Setter TargetName="BorderClose" Property="Background" Value="Silver"/>-->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--=============================================================================================================-->
+    <!--btn maximize-->
+    <Style x:Key="MaximizeStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <BulletDecorator>
+                        <BulletDecorator.Bullet>
+                            <Grid Background="Transparent">
+                                <Border x:Name="BorderMaximize" Background="Transparent" BorderThickness="1" CornerRadius="0" 
+                                        BorderBrush="#FF969A9D" Opacity="0" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" />
+                                <Path Visibility="{TemplateBinding Visibility}" Width="11" Height="10" 
+                                      x:Name="Maximize" UseLayoutRounding="True" SnapsToDevicePixels="True"
+                                      StrokeThickness="1" Stroke="#fff" 
+                                      Data="M 0 3 L 6 3 L 6 9 L 0 9 L 0 2 M 3 3 L 3 0 L 10 0 L 10 6 L 6 6">
+                                </Path>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderMaximize" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Maximize" Property="Stroke" Value="#FF16B5FF"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <!--<Setter TargetName="BorderMaximize" Property="Background" Value="Silver"/>-->
+                            <Setter TargetName="Maximize" Property="Stroke" Value="#FF16B5FF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--=============================================================================================================-->
+    <!--btn minimize-->
+    <Style x:Key="MinimizeStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <BulletDecorator HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <BulletDecorator.Bullet>
+                            <Grid Background="Transparent">
+                                <Border x:Name="BorderMinimize" Background="Transparent" BorderThickness="1" CornerRadius="0" 
+                                        BorderBrush="#FF969A9D" Opacity="0" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                                </Border>
+                                <Path Visibility="Visible" Width="12" Height="10" x:Name="Minisize" SnapsToDevicePixels="True" 
+                                      StrokeThickness="1" Stroke="#fff" Data="M 0 7.5 L 12 7.5" UseLayoutRounding="True">
+                                </Path>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderMinimize" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Minisize" Property="Stroke" Value="#FF16B5FF"/>
+
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <!--<Setter TargetName="BorderMinimize" Property="Background" Value="Silver"/>-->
+                            <Setter TargetName="Minisize" Property="Stroke" Value="#FF16B5FF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--<Style x:Key="MainCombine" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="MaxWidth"
+                Value="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidth}}"/>
+        <Setter Property="MaxHeight"
+                Value="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeight}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border Name="MainBorder" Background="#FFFFFF" BorderBrush="#FF999999" BorderThickness="1" CornerRadius="0" Margin="0" 
+                            Padding="0" UseLayoutRounding="True" >
+                        <Grid Background="#FFFFFF" Margin="0,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="0"/>
+                            </Grid.RowDefinitions>-->
+
+                            <!--title-->
+                            <!--<Grid  Grid.Row="0" MouseLeftButtonDown="Title_MouseLeftButtonDown" Background="#FFFFFF" Panel.ZIndex="9">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width ="270"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="3" 
+                                       MouseDoubleClick="DoubleClick" Background="Transparent" Panel.ZIndex="5"/>
+
+                                <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="-40,0,0,0" 
+                                           VerticalAlignment="Center" FontFamily="Segoe UI Semi" FontSize="17" Foreground="#3C3C3C" />
+
+                                <Grid Grid.Column="2"  Width="77" HorizontalAlignment="Right" VerticalAlignment="Center" Panel.ZIndex="6">
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0"
+                                            Click="Minimize_Click" VerticalContentAlignment="Center" ToolTip="Minimize" Style="{DynamicResource MinimizeStyle}"/>
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,0,0,0"
+                                            Click="Maximize_Click" VerticalContentAlignment="Center" ToolTip="Maximize" Style="{DynamicResource MaximizeStyle}"/>
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="48,0,0,0"
+                                            Click="ButtonOnClick" VerticalContentAlignment="Center" ToolTip="Close" Style="{DynamicResource MainCloseStyle}"/>
+                                </Grid>
+                            </Grid>-->
+
+                            <!--window content-->
+                            <!--<Grid Grid.Row="1" Background="#FFFFFF">
+                                <Border  Padding="0,0,0,0" Background="Transparent" >
+                                    <Border BorderBrush="White"  BorderThickness="0" Padding="0">
+                                        <AdornerDecorator>
+                                            <ContentPresenter/>
+                                        </AdornerDecorator>
+                                    </Border>
+                                </Border>
+                                <ResizeGrip x:Name="WindowResizeGrip" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                            Visibility="Hidden" Margin="0" Style="{DynamicResource ResizeGripStyle}"/>
+                            </Grid>-->
+
+                            <!--bottom-->
+                            <!--<ContentPresenter Grid.Row="2" Margin="0" HorizontalAlignment="Center" Content="{TemplateBinding Tag}"/>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                            <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--=============================================================================================================-->
+    <!--btn close-->
+    <!--<Style x:Key="MainCloseStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <BulletDecorator>
+                        <BulletDecorator.Bullet>
+                            <Grid Background="Transparent">
+                                <Border x:Name="BorderClose" Background="Transparent" BorderThickness="1" CornerRadius="0" BorderBrush="#FF969A9D" 
+                                        Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Opacity="0"/>
+                                <Path Visibility="Visible" Width="9" Height="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      SnapsToDevicePixels="False" StrokeThickness="2" Stroke="#666666" 
+                                      Data="M 0 0 L 9 9 M 0 9 L 9 0" UseLayoutRounding="True">
+                                </Path>
+                                <Path Visibility="Visible" Width="9" Height="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      x:Name="xClose" SnapsToDevicePixels="True" StrokeThickness="2" Stroke="#999999" 
+                                      Data="M 0 0 L 9 9 M 0 9 L 9 0" UseLayoutRounding="True" >
+                                </Path>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="xClose" Property="Stroke" Value="#FFE52020"/>
+                            <Setter TargetName="BorderClose" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BorderClose" Property="Background" Value="Silver"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--=============================================================================================================-->
+    <!--btn maximize-->
+    <!--<Style x:Key="MaximizeStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <BulletDecorator>
+                        <BulletDecorator.Bullet>
+                            <Grid Background="Transparent">
+                                <Border x:Name="BorderMaximize" Background="Transparent" BorderThickness="1" CornerRadius="0" 
+                                        BorderBrush="#FF969A9D" Opacity="0" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" />
+                                <Path Visibility="{TemplateBinding Visibility}" Width="11" Height="10" 
+                                      x:Name="Maximize" UseLayoutRounding="True" SnapsToDevicePixels="True"
+                                      StrokeThickness="2" Stroke="#999999" 
+                                      Data="M 0 3 L 6 3 L 6 9 L 0 9 L 0 2 M 3 3 L 3 0 L 10 0 L 10 6 L 6 6">
+                                </Path>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderMaximize" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Maximize" Property="Stroke" Value="#373A3D"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BorderMaximize" Property="Background" Value="Silver"/>
+                            <Setter TargetName="Maximize" Property="Stroke" Value="#FF65696C"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--=============================================================================================================-->
+    <!--btn minimize-->
+    <!--<Style x:Key="MinimizeStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <BulletDecorator HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <BulletDecorator.Bullet>
+                            <Grid Background="Transparent">
+                                <Border x:Name="BorderMinimize" Background="Transparent" BorderThickness="1" CornerRadius="0" 
+                                        BorderBrush="#FF969A9D" Opacity="0" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                                </Border>
+                                <Path Visibility="Visible" Width="12" Height="10" x:Name="Minisize" SnapsToDevicePixels="True" 
+                                      StrokeThickness="3" Stroke="#999999" Data="M 0 7.5 L 12 7.5" UseLayoutRounding="True">
+                                </Path>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderMinimize" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Minisize" Property="Stroke" Value="#373A3D"/>
+
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BorderMinimize" Property="Background" Value="Silver"/>
+                            <Setter TargetName="Minisize" Property="Stroke" Value="#FF65696C"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--style cho ToggleButton=========================================================================================-->
+    <Style x:Key="ToggleBtnMainWindow" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Foreground" Value="#333" />
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Name="border" BorderThickness="0" Padding="0,0" BorderBrush="DarkGray" CornerRadius="0" 
+                            Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="border" Value="#F78A09"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#F78A09"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="border" Value="#F0F0F0"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsHitTestVisible" Value="False"/>
+                                <Condition Property="Focusable" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

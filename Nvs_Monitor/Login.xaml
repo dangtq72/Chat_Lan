@@ -1,0 +1,52 @@
+﻿<Window x:Class="Nvs_Monitor.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="Transparent"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ĐĂNG NHẬP" Height="350" Width="600" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True"
+        KeyDown="Window_KeyDown" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="Border_MouseLeftButtonDown" Closed="Window_Closed">
+
+    <Grid Margin="0" Style="{DynamicResource CenterGrid}" >
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="/Nvs_Monitor;component/Images/login_luna.png"/>
+        </Grid.Background>-->
+
+        <Grid Name="gridClock" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="110" Margin="0,10,10,0">
+
+        </Grid>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFC8C9C8" Margin="0,160,0,0" Name="gridUser">
+            <TextBox Text="" GotFocus="txtUser_GotFocus" HorizontalAlignment="Center" Name="txtUser" Width="205" />
+        </Grid>
+        <Label HorizontalAlignment="Stretch" Margin="10,160,10,0" Name="lblUser" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="24" Visibility="Hidden" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFC8C9C8" Margin="0,188,0,0" Name="gridPass">
+            <PasswordBox Password="" GotFocus="pwbPass_GotFocus" HorizontalAlignment="Center" Name="pwbPass" Width="205" 
+                     KeyDown="pwbPass_KeyDown" LostFocus="pwbPass_LostFocus">
+                <PasswordBox.ToolTip>
+                    <ToolTip Name="tt_pass" Visibility="Hidden" ToolTipService.InitialShowDelay="120" ToolTipService.ShowDuration="5000" >
+                        <Grid Height="80" Width="300">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Width="20" Height="20"
+                                   Source="/Nvs_Monitor;component/Images/Login/Warning.png"/>
+                            <TextBlock Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="32,0,0,0" FontSize="13" 
+                                       Text="Caps Lock Is On" Foreground="#003399"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Left" TextAlignment="Justify" Margin="32,0,0,0"
+                                       Text="Having Caps Lock on may cause your to enter password incorrectly. You should press Caps Lock to turn it before entering your password." 
+                                       Foreground="#70708B" TextWrapping="Wrap"/>
+                        </Grid>
+                    </ToolTip>
+                </PasswordBox.ToolTip>
+            </PasswordBox>
+        </Grid>
+        <Button Style="{DynamicResource btnLogin}" Click="btnLogin_Click" HorizontalAlignment="Center" Margin="398,188,130,0" Name="btnLogin" VerticalAlignment="Top" />
+        <Button Style="{DynamicResource btnClose}" Click="btnCancel_Click" HorizontalAlignment="Right" Margin="0,0,20,50" Name="btnCancel" VerticalAlignment="Bottom" Width="28" Height="28"/>
+        <!--<Label Content="Đang bật caps lock" Height="28" HorizontalAlignment="Center" VerticalContentAlignment="Center" Margin="0,203,0,0" Name="lblCapsLock" VerticalAlignment="Top" Width="118" />-->
+        <Label Content="" Height="27" HorizontalAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,222,0,0" Name="lblLogin" VerticalAlignment="Top" Visibility="Hidden" Width="340" />
+
+
+        <Label Content="Label" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,70" Name="lblMsg" Height="27" Width="300" VerticalAlignment="Bottom" Visibility="Hidden" Foreground="#FFCC3333" />
+        <ProgressBar Background="Gray" HorizontalAlignment="Center"  Name="probar" Width="350" Margin="0,0,0,50" Height="15" VerticalAlignment="Bottom" Visibility="Hidden" Maximum="100"/>
+    </Grid>
+</Window>

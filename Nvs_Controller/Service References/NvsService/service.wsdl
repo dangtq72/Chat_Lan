@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NvsService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_NvsContractService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ObjInfo" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="NvsContractService_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Subscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_UnSubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnSubscribe" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_UnSubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnSubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_AllCode_CheckWCF_InputMessage">
+    <wsdl:part name="parameters" element="tns:AllCode_CheckWCF" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_AllCode_CheckWCF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AllCode_CheckWCFResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_User_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:User_Login" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_User_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:User_LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Send_Msg_InputMessage">
+    <wsdl:part name="parameters" element="tns:Send_Msg" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Send_Msg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Send_MsgResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Get_All_User_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_All_User" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Get_All_User_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_All_UserResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Get_msgSend_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_msgSend" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Get_msgSend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_msgSendResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Get_msgReceive_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_msgReceive" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_Get_msgReceive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_msgReceiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_PushMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PushMessage" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_PushMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PushMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_PushSession_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PushSession" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_PushSession_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PushSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_PushData_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PushData" />
+  </wsdl:message>
+  <wsdl:message name="NvsContractService_PushData_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PushDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NvsContractService">
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/Subscribe" message="tns:NvsContractService_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/SubscribeResponse" message="tns:NvsContractService_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnSubscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/UnSubscribe" message="tns:NvsContractService_UnSubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/UnSubscribeResponse" message="tns:NvsContractService_UnSubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AllCode_CheckWCF">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/AllCode_CheckWCF" message="tns:NvsContractService_AllCode_CheckWCF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/AllCode_CheckWCFResponse" message="tns:NvsContractService_AllCode_CheckWCF_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="User_Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/User_Login" message="tns:NvsContractService_User_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/User_LoginResponse" message="tns:NvsContractService_User_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Send_Msg">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/Send_Msg" message="tns:NvsContractService_Send_Msg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/Send_MsgResponse" message="tns:NvsContractService_Send_Msg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_All_User">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/Get_All_User" message="tns:NvsContractService_Get_All_User_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/Get_All_UserResponse" message="tns:NvsContractService_Get_All_User_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_msgSend">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/Get_msgSend" message="tns:NvsContractService_Get_msgSend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/Get_msgSendResponse" message="tns:NvsContractService_Get_msgSend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_msgReceive">
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/Get_msgReceive" message="tns:NvsContractService_Get_msgReceive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/Get_msgReceiveResponse" message="tns:NvsContractService_Get_msgReceive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PushMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/PushMessage" message="tns:NvsContractService_PushMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/PushMessageResponse" message="tns:NvsContractService_PushMessage_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PushSession">
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/PushSession" message="tns:NvsContractService_PushSession_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/PushSessionResponse" message="tns:NvsContractService_PushSession_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PushData">
+      <wsdl:output wsaw:Action="http://tempuri.org/NvsContractService/PushData" message="tns:NvsContractService_PushData_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/NvsContractService/PushDataResponse" message="tns:NvsContractService_PushData_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_NvsContractService" type="tns:NvsContractService">
+    <wsp:PolicyReference URI="#NetTcpBinding_NvsContractService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Subscribe">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/Subscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnSubscribe">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/UnSubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllCode_CheckWCF">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/AllCode_CheckWCF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_Login">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/User_Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Msg">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/Send_Msg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_All_User">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/Get_All_User" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_msgSend">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/Get_msgSend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_msgReceive">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/Get_msgReceive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushMessage">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/PushMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushSession">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/PushSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushData">
+      <soap12:operation soapAction="http://tempuri.org/NvsContractService/PushData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NvsService">
+    <wsdl:port name="NetTcpBinding_NvsContractService" binding="tns:NetTcpBinding_NvsContractService">
+      <soap12:address location="net.tcp://localhost:8888/Nvs_Wcf" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8888/Nvs_Wcf</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

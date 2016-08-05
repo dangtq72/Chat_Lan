@@ -1,0 +1,148 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="Nvs_Monitor.Themes.Dark.WindowStyle">
+
+    <DropShadowEffect x:Key="z-depth2" BlurRadius="8" ShadowDepth="2.5" Direction="270" Color="#CCC"/>
+
+    <!--Window-->
+    <Style x:Key="WindowFormStyle" TargetType="{x:Type Window}" BasedOn="{x:Null}">
+        <EventSetter Event="Loaded" Handler="LoadForm"/>
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="BorderBrush" Value="#222"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid>
+                        <Border Background="#444" BorderBrush="#008acf" BorderThickness="1" Margin="25" Padding="0,0,0,0"
+                                UseLayoutRounding="True" SnapsToDevicePixels="True" Effect="{StaticResource z-depth2}"/>
+                        <Border Name="MainBorder" Background="#979797" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="7,0,7,7"
+                                Margin="26" Padding="0,0,0,0" Panel.ZIndex="99" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="0"/>
+                                </Grid.RowDefinitions>
+
+                                <!--title-->
+                                <Grid  Grid.Row="0" MouseLeftButtonDown="Title_MouseLeftButtonDown" Background="{TemplateBinding BorderBrush}" Panel.ZIndex="9">
+                                    <Label Content="{TemplateBinding Title}" HorizontalAlignment="Left" Margin="5,0,0,0" FontWeight="SemiBold"
+                                           VerticalAlignment="Center" FontFamily="400-Arial" TextBlock.FontSize="15" Foreground="#DDD" Name="lblTitle">
+                                        <Label.RenderTransform>
+                                            <ScaleTransform CenterX="50" CenterY="50" ScaleX="1" ScaleY="1" />
+                                        </Label.RenderTransform>
+                                    </Label>
+
+
+                                    <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,-5,8,0"
+                                            Width="11.195" Height="12.77" Name="btnClose" Click="ButtonOnClick"
+                                            VerticalContentAlignment="Center" ToolTip="Close"
+                                            Style="{DynamicResource CloseButtonStyle}" BorderBrush="{TemplateBinding BorderBrush}"/>
+                                </Grid>
+
+                                <!--window content-->
+                                <Grid Grid.Row="1" Background="#FFFFFF">
+                                    <AdornerDecorator >
+                                        <ContentPresenter x:Name="content">
+                                            <ContentPresenter.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <RotateTransform/>
+                                                </TransformGroup>
+                                            </ContentPresenter.RenderTransform>
+                                        </ContentPresenter>
+                                    </AdornerDecorator>
+
+                                    <ResizeGrip x:Name="WindowResizeGrip" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                            Visibility="Hidden" Margin="0,0,0,0" Style="{DynamicResource ResizeGripStyle}"/>
+                                </Grid>
+
+                                <!--bottom-->
+                                <ContentPresenter Grid.Row="2" Margin="0" HorizontalAlignment="Center" Content="{TemplateBinding Tag}"/>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                            <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger Property="Window.IsActive" Value="true">
+                            <Setter Property="Control.Background" Value="Blue" />
+                            <!--<Setter Property="Window.Title" Value="Testing" />-->
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Window.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--btn close-->
+    <Style x:Key="CloseButtonStyle" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+        <Setter Property="BorderBrush" Value="#222"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Viewbox x:Name="Close">
+                            <Canvas Width="15.4167" Height="15.5001">
+                                <Path x:Name="Rect1" Width="15.4167" Height="15.5001" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="{TemplateBinding BorderBrush}" Data="F1 M 2,0L 13.4167,0C 14.5212,0 15.4167,0.895447 15.4167,2L 15.4167,13.5001C 15.4167,14.6046 14.5212,15.5001 13.4167,15.5001L 2,15.5001C 0.895447,15.5001 0,14.6046 0,13.5001L 0,2C 0,0.895447 0.895447,0 2,0 Z "/>
+                                <Path x:Name="X1" Width="15.001" Height="15.001" Canvas.Left="0.209" Canvas.Top="0.235" Stretch="Fill" Fill="#999" Data="F1 M 14.7216,0.723328C 15.3725,1.37421 15.3725,2.4295 14.7216,3.08038L 10.0667,7.73535L 14.7218,12.3905C 15.3727,13.0414 15.3726,14.0966 14.7217,14.7475C 14.0709,15.3984 13.0156,15.3984 12.3647,14.7475L 7.70959,10.0924L 3.05438,14.7476C 2.4035,15.3985 1.34827,15.3985 0.697388,14.7476C 0.0465088,14.0967 0.0465088,13.0414 0.697388,12.3906L 5.3526,7.73541L 0.697449,3.08026C 0.0465698,2.42938 0.0465698,1.37415 0.697449,0.723267C 1.34833,0.0723877 2.40363,0.0723877 3.0545,0.723267L 7.70966,5.37836L 12.3646,0.723328C 13.0155,0.0724487 14.0707,0.0724487 14.7216,0.723328 Z "/>
+                                <Path x:Name="X2" Width="13.6364" Height="13.6351" Canvas.Left="0.891403" Canvas.Top="0.91861" Stretch="Fill" Fill="#666" Data="F1 M 1.19855,1.2243C 1.60614,0.816711 2.26715,0.816711 2.67474,1.2243L 7.70966,6.25922L 12.7444,1.22443C 13.152,0.816711 13.813,0.816711 14.2207,1.22437C 14.6284,1.63202 14.6284,2.29303 14.2206,2.70062L 9.18585,7.73541L 14.222,12.7716C 14.6297,13.1793 14.6297,13.8402 14.222,14.2479C 13.8143,14.6556 13.1535,14.6556 12.7458,14.2479L 7.70966,9.21173L 2.67346,14.2479C 2.26575,14.6556 1.6048,14.6556 1.19714,14.2479C 0.78949,13.8403 0.78949,13.1793 1.19714,12.7716L 6.23334,7.73541L 1.19855,2.70062C 0.790894,2.29297 0.790833,1.63202 1.19855,1.2243 Z "/>
+                            </Canvas>
+                        </Viewbox>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Fill" TargetName="X2" Value="#ff0000"/>
+                        </Trigger>
+                        <Trigger Property="IsDefaulted" Value="True"/>
+                        <Trigger Property="IsMouseOver" Value="True"/>
+                        <Trigger Property="IsPressed" Value="True"/>
+                        <Trigger Property="IsEnabled" Value="False"/>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ResizeGripStyle" TargetType="{x:Type ResizeGrip}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                    <Border Background="Transparent" SnapsToDevicePixels="True" Width="16" Height="16">
+                        <Rectangle Margin="2">
+                            <Rectangle.Fill>
+                                <DrawingBrush Viewport="0,0,4,4" ViewportUnits="Absolute" Viewbox="0,0,8,8" 
+                                              ViewboxUnits="Absolute" TileMode="Tile">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <DrawingGroup.Children>
+                                                <GeometryDrawing Brush="#eee" Geometry="M 4 4 L 4 8 L 8 8 L 8 4 z"/>
+                                            </DrawingGroup.Children>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--end Window-->
+</ResourceDictionary>

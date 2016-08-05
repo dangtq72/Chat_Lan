@@ -1,0 +1,13 @@
+﻿<Window x:Class="Nvs_Monitor.frmNoteBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NoteBox" ResizeMode="NoResize" ShowInTaskbar="False" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        AllowsTransparency="True" MinHeight="150" MinWidth="350" 
+        Name="frm" SizeToContent="WidthAndHeight" 
+        KeyDown="Window_KeyDown" Loaded="Window_Loaded" >
+
+    <Grid Name="grdMessageBox">
+
+    </Grid >
+</Window>

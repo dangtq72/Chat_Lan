@@ -1,0 +1,37 @@
+﻿<Application x:Class="Nvs_Monitor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml" Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/Button.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/CheckBox.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/Color.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/Combine.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/ComboBox.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/DataGrid.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/DatePicker.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/Grid.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/GroupBox.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/Label.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/ListBox.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/MainWindow.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/NoteBox.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/PasswordBox.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/ProgressBar.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/RadioButton.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/ScrollViewer.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/TabControl.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/ToggleButton.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/TextBox.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/WindowStyle.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/TabControl_new.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/ListView.xaml"/>
+                <ResourceDictionary Source="/Nvs_Monitor;component/Themes/Dark/ContextMenu.xaml"/>
+
+               
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

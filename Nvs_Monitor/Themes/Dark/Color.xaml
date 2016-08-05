@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <LinearGradientBrush x:Key="Greenbg" EndPoint="0.027,0.229" StartPoint="0.973,0.771">
+        <GradientStop Color="#FF005D00"/>
+        <GradientStop Color="#FF07AA09" Offset="0.666"/>
+        <GradientStop Color="#FF20CA21" Offset="0.666"/>
+        <GradientStop Color="#FF30F630" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Redbg" EndPoint="0.027,0.229" StartPoint="0.973,0.771">
+        <GradientStop Color="#FFB30001" Offset="0.009"/>
+        <GradientStop Color="#FFD03C3C" Offset="0.666"/>
+        <GradientStop Color="#FFF24C4C" Offset="0.666"/>
+        <GradientStop Color="#FFFF6666" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Yellobg" EndPoint="0.027,0.229" StartPoint="0.973,0.771">
+        <GradientStop Color="#FFD9AE00"/>
+        <GradientStop Color="#FFF1C609" Offset="0.666"/>
+        <GradientStop Color="#FFFFD818" Offset="0.668"/>
+        <GradientStop Color="#FFFFE046" Offset="1"/>
+
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BlackBg" EndPoint="0.042,0.177" StartPoint="0.958,0.823">
+        <GradientStop Color="#333"/>
+        <GradientStop Color="#FF393A39" Offset="0.666"/>
+        <GradientStop Color="#FF4B4B4B" Offset="0.668"/>
+        <GradientStop Color="#666" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BlackBg1" EndPoint="-0.025,0.304" StartPoint="1.025,0.696">
+        <GradientStop Color="#333"/>
+        <GradientStop Color="#FF393A39" Offset="0.666"/>
+        <GradientStop Color="#FF4B4B4B" Offset="0.667"/>
+        <GradientStop Color="#666" Offset="1"/>
+    </LinearGradientBrush>
+</ResourceDictionary>
