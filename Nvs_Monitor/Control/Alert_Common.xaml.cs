@@ -30,6 +30,7 @@ namespace Nvs_Monitor
         public static DependencyProperty SoundFileProperty = DependencyProperty.Register("SoundFile", typeof(string), typeof(SimpleAlert));
 
         public static DependencyProperty DBProperty = DependencyProperty.Register("MSG", typeof(string), typeof(SimpleAlert));
+        public static DependencyProperty UserNameProperty = DependencyProperty.Register("UserName", typeof(string), typeof(SimpleAlert));
 
         [Bindable(true)]
         public bool IsSound
@@ -45,11 +46,19 @@ namespace Nvs_Monitor
             set { SetValue(SoundFileProperty, value); }
 
         }
+
         [Bindable(true)]
         public string Msg
         {
             get { return (string)GetValue(DBProperty); }
             set { SetValue(DBProperty, value); }
+        }
+
+        [Bindable(true)]
+        public string UserName
+        {
+            get { return (string)GetValue(UserNameProperty); }
+            set { SetValue(UserNameProperty, value); }
         }
 
         SoundEffect _SoundEffect;
@@ -78,6 +87,11 @@ namespace Nvs_Monitor
             {
                 _SoundEffect.Stop();
             }
+        }
+
+        private void DesktopAlertBase_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Common_Event.c_NVSEvent.WhenClickAlert(UserName, UserName);
         }
     }
 }

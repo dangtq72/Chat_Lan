@@ -4,7 +4,7 @@
         xmlns:da="clr-namespace:DesktopAlert;assembly=DesktopAlert"
         Title="Thông tin chung" ResizeMode="NoResize" Width="300"
         SizeToContent="Height" Loaded="DesktopAlertBase_Loaded" 
-        Closing="DesktopAlertBase_Closing" Style="{DynamicResource WindowFormStyle}">
+        Closing="DesktopAlertBase_Closing" Style="{DynamicResource WindowFormStyle}" MouseLeftButtonDown="DesktopAlertBase_MouseLeftButtonDown">
     <Grid Style="{DynamicResource BottomGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />

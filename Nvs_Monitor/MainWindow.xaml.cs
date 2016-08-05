@@ -47,9 +47,12 @@ namespace Nvs_Monitor
         {
             Show_Friend();
             Get_Msg_History();
-            Common_Event.c_NVSEvent.WhenReceiveCallBackDataEvent += c_NVSEvent_WhenReceiveCallBackDataEvent;
             this.Title = "HELLO " + Common.c_User_Info.User_Name;
+
+            Common_Event.c_NVSEvent.WhenReceiveCallBackDataEvent += c_NVSEvent_WhenReceiveCallBackDataEvent;
+            Common_Event.c_NVSEvent.WhenClickAlertEvent += C_NVSEvent_WhenClickAlertEvent;
         }
+
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -280,6 +283,25 @@ namespace Nvs_Monitor
         }
 
 
+        void C_NVSEvent_WhenClickAlertEvent(object sender, NVSEventArgs e)
+        {
+            try
+            {
+                string _userName = (string)sender;
+                if (_userName == null) return;
+                if (c_dic_User.ContainsKey(_userName) == false) return;
+
+                if (c_User_To != null && c_User_To.User_Name == _userName) return;
+                c_User_To = c_dic_User[_userName];
+
+                lsvFriend.SelectedItem = c_User_To;
+            }
+            catch (Exception ex)
+            {
+                NaviCommon.Common.log.Error(ex.ToString());
+            }
+        }
+
 
         void Change_User_OnlineStatus(Session_Info _Session_Info)
         {
@@ -401,6 +423,7 @@ namespace Nvs_Monitor
                 _Alert_Common.FontWeight = FontWeights.Bold;
                 _Alert_Common.FontSize = 13;
                 _Alert_Common.Msg = p_Message_Info.Message;
+                _Alert_Common.UserName = p_Message_Info.From_User_Name;
 
                 _Alert_Common.IsSound = true;
                 _Alert_Common.SoundFile = Common.c_FileName_Sound_Common;

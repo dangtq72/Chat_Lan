@@ -13,6 +13,7 @@ namespace NaviCommon
 
         // Event TAM
         public event NVSEventHandler WhenReceiveCallBackDataEvent;
+        public event NVSEventHandler WhenClickAlertEvent;
 
         //Methods 
         public void WhenReceiveCallBackData(object sender, object obj)
@@ -20,6 +21,14 @@ namespace NaviCommon
             if (WhenReceiveCallBackDataEvent != null)
             {
                 WhenReceiveCallBackDataEvent(sender, new NVSEventArgs(obj));
+            }
+        }
+
+        public void WhenClickAlert(object sender, object obj)
+        {
+            if (WhenClickAlertEvent != null)
+            {
+                WhenClickAlertEvent(sender, new NVSEventArgs(obj));
             }
         }
     }
