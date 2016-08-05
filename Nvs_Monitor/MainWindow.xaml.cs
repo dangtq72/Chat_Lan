@@ -258,10 +258,12 @@ namespace Nvs_Monitor
                 {
                     Message_Info _Message_Info = (Message_Info)e.Obj;
                     _Message_Info.Type = (int)Enum_Message_Type.Receive;
-                    UpdateListView(_Message_Info);
 
                     Add_msg_ToDic(_Message_Info);
                     Common_Alert(_Message_Info);
+
+                    if (_Message_Info.From_User_Name != c_User_To.User_Name) return;
+                    UpdateListView(_Message_Info);
                 }
                 else if (_sender == Key_Raise_Event.Session)
                 {
@@ -365,7 +367,6 @@ namespace Nvs_Monitor
                 else
                 {
                     if (c_User_To == null) return;
-                    if (p_Message_Info.From_User_Name != c_User_To.User_Name) return;
                     //lsvMessage.Items.Insert(0, p_Message_Info);
                     lsvMessage.Items.Add(p_Message_Info);
                     lsvMessage.ScrollIntoView(p_Message_Info);
