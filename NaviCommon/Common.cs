@@ -14,7 +14,7 @@ namespace NaviCommon
         public static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static User_Info c_User_Info;
         public static string ID;
-
+        public static string c_FileName_Sound_Common = "Sound\\message.wav";                       //đường dẫn file âm thanh cảnh báo chung
         static NaviCommon.MyQueue c_queue_send = new NaviCommon.MyQueue();
 
         public static void Enqueue_Send(object p_object)
@@ -38,7 +38,7 @@ namespace NaviCommon
                 NaviCommon.Common.log.Error(ex.ToString());
                 return null;
             }
-        }       
+        }
     }
 
 }

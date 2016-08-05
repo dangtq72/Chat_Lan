@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DesktopAlert, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Working\General\dll\DesktopAlert\Không cảnh báo\DesktopAlert.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Working\General\dll\log4net.dll</HintPath>
@@ -66,11 +70,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\SoundEffect.cs" />
+    <Compile Include="Control\Alert_Common.xaml.cs">
+      <DependentUpon>Alert_Common.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\SimpleAlert.xaml.cs">
+      <DependentUpon>SimpleAlert.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Themes\Dark\DataGrid.cs" />
     <Compile Include="Themes\Dark\DatePicker.cs" />
     <Compile Include="Themes\Dark\MainWindow.cs" />
     <Compile Include="Themes\Dark\NoteBox.cs" />
     <Compile Include="Themes\Dark\WindowStyle.cs" />
+    <Page Include="Control\Alert_Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\SimpleAlert.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -275,9 +294,7 @@
     <Resource Include="Themes\Images\NoteBox\question.png" />
     <Resource Include="Themes\Images\NoteBox\question_1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Control\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Login\bg_button_on.png" />
   </ItemGroup>

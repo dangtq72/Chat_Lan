@@ -261,6 +261,7 @@ namespace Nvs_Monitor
                     UpdateListView(_Message_Info);
 
                     Add_msg_ToDic(_Message_Info);
+                    Common_Alert(_Message_Info);
                 }
                 else if (_sender == Key_Raise_Event.Session)
                 {
@@ -276,24 +277,7 @@ namespace Nvs_Monitor
             }
         }
 
-        delegate void ShowListViewDelegate(Message_Info p_Message_Info);
-        private void UpdateListView(Message_Info p_Message_Info)
-        {
-            try
-            {
-                if (lsvMessage.Dispatcher.CheckAccess() == false)
-                    lsvMessage.Dispatcher.Invoke(new ShowListViewDelegate(UpdateListView), p_Message_Info);
-                else
-                {
-                    //lsvMessage.Items.Insert(0, p_Message_Info);
-                    lsvMessage.Items.Add(p_Message_Info);
-                }
-            }
-            catch (Exception ex)
-            {
-                NaviCommon.Common.log.Error(ex.ToString());
-            }
-        }
+
 
         void Change_User_OnlineStatus(Session_Info _Session_Info)
         {
@@ -364,6 +348,62 @@ namespace Nvs_Monitor
                     else
                         c_dic_Msg[_key2] = _lst;
                 }
+            }
+            catch (Exception ex)
+            {
+                NaviCommon.Common.log.Error(ex.ToString());
+            }
+        }
+
+        delegate void ShowListViewDelegate(Message_Info p_Message_Info);
+        private void UpdateListView(Message_Info p_Message_Info)
+        {
+            try
+            {
+                if (lsvMessage.Dispatcher.CheckAccess() == false)
+                    lsvMessage.Dispatcher.Invoke(new ShowListViewDelegate(UpdateListView), p_Message_Info);
+                else
+                {
+                    if (c_User_To == null) return;
+                    if (p_Message_Info.From_User_Name != c_User_To.User_Name) return;
+                    //lsvMessage.Items.Insert(0, p_Message_Info);
+                    lsvMessage.Items.Add(p_Message_Info);
+                    lsvMessage.ScrollIntoView(p_Message_Info);
+                }
+            }
+            catch (Exception ex)
+            {
+                NaviCommon.Common.log.Error(ex.ToString());
+            }
+        }
+
+        delegate void delegateMes_Alert(Message_Info p_Message_Info);
+        private void Common_Alert(Message_Info p_Message_Info)
+        {
+            if (lsvMessage.Dispatcher.CheckAccess() == false)
+            {
+                lsvMessage.Dispatcher.Invoke(new delegateMes_Alert(Common_Alert), p_Message_Info);
+            }
+            else
+            {
+                ShowCommonAlert(p_Message_Info);
+            }
+        }
+
+        void ShowCommonAlert(Message_Info p_Message_Info)
+        {
+            try
+            {
+                Alert_Common _Alert_Common = new Alert_Common();
+                _Alert_Common.Title = p_Message_Info.From_User_Name;
+
+                _Alert_Common.FontWeight = FontWeights.Bold;
+                _Alert_Common.FontSize = 13;
+                _Alert_Common.Msg = p_Message_Info.Message;
+
+                _Alert_Common.IsSound = true;
+                _Alert_Common.SoundFile = Common.c_FileName_Sound_Common;
+                _Alert_Common.Time = "00:00:03";
             }
             catch (Exception ex)
             {
