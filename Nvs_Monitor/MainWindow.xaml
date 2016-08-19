@@ -2,8 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStartupLocation="CenterScreen"  
-        Style="{DynamicResource WindowFormStyle}" Height="500" Width="800"
+        Style="{DynamicResource MainCombine}" Height="500" Width="800"
         xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" 
+        Icon="/Nvs_Monitor;component/icon.jpg"
         Title="Lucy Chat" Loaded="Window_Loaded" Closing="Window_Closing" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid Style="{DynamicResource CenterGrid}">
         <Grid.RowDefinitions>
@@ -88,8 +89,16 @@
 
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Width="400" Header="" DisplayMemberBinding="{Binding Path=Message}" />
                             <GridViewColumn Width="80" Header="" DisplayMemberBinding="{Binding Path=Time}" />
+                            <GridViewColumn Width="400" Header="" DisplayMemberBinding="{Binding Path=Message}" />
+                            <GridViewColumn Width="400">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=Icon}" Width="40" Height="40"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

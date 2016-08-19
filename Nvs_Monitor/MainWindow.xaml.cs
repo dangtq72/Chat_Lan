@@ -267,6 +267,8 @@ namespace Nvs_Monitor
 
                     if (_Message_Info.From_User_Name != c_User_To.User_Name) return;
                     UpdateListView(_Message_Info);
+
+                    
                 }
                 else if (_sender == Key_Raise_Event.Session)
                 {
@@ -389,7 +391,13 @@ namespace Nvs_Monitor
                 else
                 {
                     if (c_User_To == null) return;
-                    //lsvMessage.Items.Insert(0, p_Message_Info);
+                    if (p_Message_Info.Message == ":)")
+                    {
+                        p_Message_Info.Icon = "/Nvs_Monitor;component/Icons/smile_80_anim.gif";
+                        p_Message_Info.Message = string.Empty;
+                    }
+
+
                     lsvMessage.Items.Add(p_Message_Info);
                     lsvMessage.ScrollIntoView(p_Message_Info);
                 }
@@ -417,6 +425,7 @@ namespace Nvs_Monitor
         {
             try
             {
+
                 Alert_Common _Alert_Common = new Alert_Common();
                 _Alert_Common.Title = p_Message_Info.From_User_Name;
 
@@ -428,6 +437,9 @@ namespace Nvs_Monitor
                 _Alert_Common.IsSound = true;
                 _Alert_Common.SoundFile = Common.c_FileName_Sound_Common;
                 _Alert_Common.Time = "00:00:03";
+
+                txtMsg.Focus();
+                txtMsg.Select(txtMsg.Text.Length, 0);
             }
             catch (Exception ex)
             {

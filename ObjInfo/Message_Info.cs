@@ -35,6 +35,9 @@ namespace ObjInfo
         public string Message { get; set; }
 
         [DataMember]
+        public string Icon { get; set; }
+
+        [DataMember]
         public string To_User_Name { get; set; }
 
         [DataMember]

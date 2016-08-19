@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>send_ico.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DesktopAlert, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -294,7 +297,9 @@
     <Resource Include="Themes\Images\NoteBox\question.png" />
     <Resource Include="Themes\Images\NoteBox\question_1.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="icon.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Login\bg_button_on.png" />
   </ItemGroup>
@@ -312,6 +317,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\send_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="send_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\smile_80_anim.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
