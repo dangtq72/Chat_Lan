@@ -98,22 +98,42 @@ namespace Nvs_Monitor
                 string _key = Common.c_User_Info.User_Name + "|" + item.User_Name;
                 string _key2 = item.User_Name + "|" + Common.c_User_Info.User_Name;
 
-                List<Message_Info> _lst = new List<Message_Info>();
-                if (c_dic_Msg.ContainsKey(_key))
+                if (c_User_To.IsGroup == 1)
                 {
-                    _lst = c_dic_Msg[_key];
-                }
-                else if (c_dic_Msg.ContainsKey(_key2))
-                {
-                    _lst = c_dic_Msg[_key2];
-                }
+                    _key = c_User_To.User_Name;
+                    List<Message_Info> _lst = new List<Message_Info>();
+                    if (c_dic_Msg.ContainsKey(_key))
+                    {
+                        _lst = c_dic_Msg[_key];
+                    }
 
-                _lst = _lst.OrderBy(p => p.Time).ToList();
-
-                lsvMessage.Items.Clear();
-                foreach (Message_Info _Message_Info in _lst)
+                    lsvMessage.Items.Clear();
+                    _lst = _lst.OrderBy(p => p.Time).ToList();
+                    foreach (Message_Info _Message_Info in _lst)
+                    {
+                        UpdateListView(_Message_Info);
+                    }
+                }
+                else
                 {
-                    UpdateListView(_Message_Info);
+                    List<Message_Info> _lst = new List<Message_Info>();
+                    if (c_dic_Msg.ContainsKey(_key))
+                    {
+                        _lst = c_dic_Msg[_key];
+                    }
+                    else if (c_dic_Msg.ContainsKey(_key2))
+                    {
+                        _lst = c_dic_Msg[_key2];
+                    }
+
+                    _lst = _lst.OrderBy(p => p.Time).ToList();
+
+                    lsvMessage.Items.Clear();
+                    _lst = _lst.OrderBy(p => p.Time).ToList();
+                    foreach (Message_Info _Message_Info in _lst)
+                    {
+                        UpdateListView(_Message_Info);
+                    }
                 }
             }
             catch (Exception ex)
@@ -260,15 +280,25 @@ namespace Nvs_Monitor
                 if (_sender == Key_Raise_Event.Message)
                 {
                     Message_Info _Message_Info = (Message_Info)e.Obj;
+                    if (_Message_Info.From_User_Name == Common.c_User_Info.User_Name)
+                    {
+                        return;
+                    }
                     _Message_Info.Type = (int)Enum_Message_Type.Receive;
 
                     Add_msg_ToDic(_Message_Info);
-                    Common_Alert(_Message_Info);
 
-                    if (_Message_Info.From_User_Name != c_User_To.User_Name) return;
+                    if (c_User_To != null && _Message_Info.To_User_Name != c_User_To.User_Name)
+                        Common_Alert(_Message_Info);
+                    else if (c_User_To == null)
+                    {
+                        Common_Alert(_Message_Info);
+                    }
+
+                    //if (_Message_Info.From_User_Name != c_User_To.User_Name && c_User_To.User_Name != "ManTT8ChemGio") return;
+
+                    if (_Message_Info.To_User_Name != c_User_To.User_Name) return;
                     UpdateListView(_Message_Info);
-
-                    
                 }
                 else if (_sender == Key_Raise_Event.Session)
                 {
@@ -289,13 +319,30 @@ namespace Nvs_Monitor
         {
             try
             {
-                string _userName = (string)sender;
-                if (_userName == null) return;
-                if (c_dic_User.ContainsKey(_userName) == false) return;
+                string _from_userName = (string)sender;
+                //string _To_UserName = (string)e.Obj;
+                Message_Info Message_Info = (Message_Info)e.Obj;
 
-                if (c_User_To != null && c_User_To.User_Name == _userName) return;
-                c_User_To = c_dic_User[_userName];
+                if (_from_userName == null) return;
+                if (c_dic_User.ContainsKey(_from_userName) == false) return;
 
+                if (c_User_To == null)
+                {
+                    c_User_To = c_dic_User[Message_Info.To_User_Name];
+                }
+                else
+                {
+                    if (Message_Info.IsGroup == 1)
+                    {
+                        c_User_To = c_dic_User[Message_Info.To_User_Name];
+                    }
+                    else if (c_User_To != null && c_User_To.User_Name == _from_userName)
+                    {
+                        return;
+                    }
+                    else
+                        c_User_To = c_dic_User[_from_userName];
+                }
                 lsvFriend.SelectedItem = c_User_To;
             }
             catch (Exception ex)
@@ -332,7 +379,7 @@ namespace Nvs_Monitor
             {
                 if (txtMsg.Text == "") return;
                 if (c_User_To == null) return;
-                Message_Info _Message_Info = new Message_Info(Common.c_User_Info.User_Name, txtMsg.Text, c_User_To.User_Name, (int)Enum_Message_Type.Send);
+                Message_Info _Message_Info = new Message_Info(Common.c_User_Info.User_Name, txtMsg.Text, c_User_To.User_Name, (int)Enum_Message_Type.Send, c_User_To.IsGroup);
                 _Controller.Send_Msg(_Message_Info);
 
                 UpdateListView(_Message_Info);
@@ -351,28 +398,57 @@ namespace Nvs_Monitor
         {
             try
             {
-                string _key = p_Message_Info.From_User_Name + "|" + p_Message_Info.To_User_Name;
-                string _key2 = p_Message_Info.To_User_Name + "|" + p_Message_Info.From_User_Name;
+                string _key_send = p_Message_Info.From_User_Name + "|" + p_Message_Info.To_User_Name;
+                string _key_receive = p_Message_Info.To_User_Name + "|" + p_Message_Info.From_User_Name;
 
-                if (c_dic_Msg.ContainsKey(_key) == false && c_dic_Msg.ContainsKey(_key2) == false)
+                if (p_Message_Info.IsGroup == 1)
                 {
-                    List<Message_Info> _lst = new List<Message_Info>();
-                    _lst.Add(p_Message_Info);
-                    c_dic_Msg[_key] = _lst;
+
+                    if (p_Message_Info.Type == (decimal)Enum_Message_Type.Receive && p_Message_Info.From_User_Name == Common.c_User_Info.User_Name)
+                    {
+                        return;
+                    }
+
+                    _key_send = p_Message_Info.To_User_Name;
+                    if (c_dic_Msg.ContainsKey(_key_send) == false)
+                    {
+                        List<Message_Info> _lst = new List<Message_Info>();
+                        _lst.Add(p_Message_Info);
+                        c_dic_Msg[_key_send] = _lst;
+                    }
+                    else
+                    {
+                        List<Message_Info> _lst;
+                        _lst = c_dic_Msg[_key_send];
+                        _lst.Add(p_Message_Info);
+                        c_dic_Msg[_key_send] = _lst;
+                    }
+
                 }
                 else
                 {
-                    List<Message_Info> _lst;
-                    if (c_dic_Msg.ContainsKey(_key))
-                        _lst = c_dic_Msg[_key];
+                    #region Normal
+                    if (c_dic_Msg.ContainsKey(_key_send) == false && c_dic_Msg.ContainsKey(_key_receive) == false)
+                    {
+                        List<Message_Info> _lst = new List<Message_Info>();
+                        _lst.Add(p_Message_Info);
+                        c_dic_Msg[_key_send] = _lst;
+                    }
                     else
-                        _lst = c_dic_Msg[_key2];
+                    {
+                        List<Message_Info> _lst;
+                        if (c_dic_Msg.ContainsKey(_key_send))
+                            _lst = c_dic_Msg[_key_send];
+                        else
+                            _lst = c_dic_Msg[_key_receive];
 
-                    _lst.Add(p_Message_Info);
-                    if (c_dic_Msg.ContainsKey(_key))
-                        c_dic_Msg[_key] = _lst;
-                    else
-                        c_dic_Msg[_key2] = _lst;
+                        _lst.Add(p_Message_Info);
+                        if (c_dic_Msg.ContainsKey(_key_send))
+                            c_dic_Msg[_key_send] = _lst;
+                        else
+                            c_dic_Msg[_key_receive] = _lst;
+                    }
+                    #endregion
                 }
             }
             catch (Exception ex)
@@ -391,15 +467,19 @@ namespace Nvs_Monitor
                 else
                 {
                     if (c_User_To == null) return;
-                    if (p_Message_Info.Message == ":)")
+                    //if (p_Message_Info.Message == ":)")
+                    //{
+                    //    p_Message_Info.Icon = "/Nvs_Monitor;component/Icons/smile_80_anim.gif";
+                    //    p_Message_Info.Message = string.Empty;
+                    //}
+
+                    Message_Info _Message_Info = new Message_Info(p_Message_Info);
+                    if (_Message_Info.IsGroup == 1)
                     {
-                        p_Message_Info.Icon = "/Nvs_Monitor;component/Icons/smile_80_anim.gif";
-                        p_Message_Info.Message = string.Empty;
+                        _Message_Info.Message = _Message_Info.From_User_Name + " --> " + _Message_Info.Message;
                     }
-
-
-                    lsvMessage.Items.Add(p_Message_Info);
-                    lsvMessage.ScrollIntoView(p_Message_Info);
+                    lsvMessage.Items.Add(_Message_Info);
+                    lsvMessage.ScrollIntoView(_Message_Info);
                 }
             }
             catch (Exception ex)
@@ -432,7 +512,9 @@ namespace Nvs_Monitor
                 _Alert_Common.FontWeight = FontWeights.Bold;
                 _Alert_Common.FontSize = 13;
                 _Alert_Common.Msg = p_Message_Info.Message;
-                _Alert_Common.UserName = p_Message_Info.From_User_Name;
+                _Alert_Common.FromUserName = p_Message_Info.From_User_Name;
+                _Alert_Common.To_UserName = p_Message_Info.To_User_Name;
+                _Alert_Common.Message_Info = p_Message_Info;
 
                 _Alert_Common.IsSound = true;
                 _Alert_Common.SoundFile = Common.c_FileName_Sound_Common;

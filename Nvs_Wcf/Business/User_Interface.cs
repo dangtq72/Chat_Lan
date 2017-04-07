@@ -24,6 +24,7 @@ namespace Nvs_Wcf
 
         List<Message_Info> _lst_Send = new List<Message_Info>();
         List<Message_Info> _lst_Recieve = new List<Message_Info>();
+        List<User_Friends_Info> _lst_Friends = new List<User_Friends_Info>();
 
         /// <summary>
         /// Lưu msg nó đã nhận
@@ -61,6 +62,12 @@ namespace Nvs_Wcf
             return _lst_Recieve;
         }
 
+        public List<User_Friends_Info> Get_Friends()
+        {
+            return _lst_Friends;
+        }
+
+
         public User_Info Get_User_Info()
         {
             return c_User_Info;
@@ -84,8 +91,21 @@ namespace Nvs_Wcf
                     Message_Info item = (Message_Info)Get_msg_Send();
                     if (item != null)
                     {
-                        //string _msg = NaviCommon.JsonFactory.Create_Json_Send<Message_Info>("SEND", item);
-                        Push_By_Identify(item.To_User_Name, item);
+                        if (item.IsGroup == 1)
+                        {
+                            foreach (Member_Info _Member_Info in c_User_Info.List_Member)
+                            {
+                                if (_Member_Info.Member_Name == c_User_Info.User_Name) continue;
+                                //Push_By_Identify(_Member_Info.Member_Name, item);
+                                if (DBMemory.c_dic_User_Interface.ContainsKey(_Member_Info.Member_Name))
+                                    DBMemory.c_dic_User_Interface[_Member_Info.Member_Name].Push_By_Identify(_Member_Info.Member_Name, item);
+                            }
+                        }
+                        else
+                        {
+                            //string _msg = NaviCommon.JsonFactory.Create_Json_Send<Message_Info>("SEND", item);
+                            Push_By_Identify(item.To_User_Name, item);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -96,7 +116,7 @@ namespace Nvs_Wcf
             }
         }
 
-        void Push_By_Identify(string p_id, Message_Info p_data)
+        public void Push_By_Identify(string p_id, Message_Info p_data)
         {
             try
             {

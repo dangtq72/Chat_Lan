@@ -89,16 +89,15 @@
 
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Width="80" Header="" DisplayMemberBinding="{Binding Path=Time}" />
+                            <GridViewColumn Width="60" Header="" DisplayMemberBinding="{Binding Path=Time}" />
                             <GridViewColumn Width="400" Header="" DisplayMemberBinding="{Binding Path=Message}" />
-                            <GridViewColumn Width="400">
+                            <!--<GridViewColumn Width="400">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Image Source="{Binding Path=Icon}" Width="40" Height="40"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-
-                            </GridViewColumn>
+                            </GridViewColumn>-->
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using NaviCommon;
+using ObjInfo;
 
 namespace Nvs_Monitor
 {
@@ -30,7 +31,10 @@ namespace Nvs_Monitor
         public static DependencyProperty SoundFileProperty = DependencyProperty.Register("SoundFile", typeof(string), typeof(SimpleAlert));
 
         public static DependencyProperty DBProperty = DependencyProperty.Register("MSG", typeof(string), typeof(SimpleAlert));
-        public static DependencyProperty UserNameProperty = DependencyProperty.Register("UserName", typeof(string), typeof(SimpleAlert));
+        public static DependencyProperty FromUserNameProperty = DependencyProperty.Register("FromUserName", typeof(string), typeof(SimpleAlert));
+        public static DependencyProperty ToUserNameProperty = DependencyProperty.Register("ToUserName", typeof(string), typeof(SimpleAlert));
+
+        public static DependencyProperty MessageProperty = DependencyProperty.Register("Message", typeof(Message_Info), typeof(SimpleAlert));
 
         [Bindable(true)]
         public bool IsSound
@@ -55,10 +59,23 @@ namespace Nvs_Monitor
         }
 
         [Bindable(true)]
-        public string UserName
+        public string FromUserName
         {
-            get { return (string)GetValue(UserNameProperty); }
-            set { SetValue(UserNameProperty, value); }
+            get { return (string)GetValue(FromUserNameProperty); }
+            set { SetValue(FromUserNameProperty, value); }
+        }
+
+        [Bindable(true)]
+        public string To_UserName
+        {
+            get { return (string)GetValue(ToUserNameProperty); }
+            set { SetValue(ToUserNameProperty, value); }
+        }
+
+        public Message_Info Message_Info
+        {
+            get { return (Message_Info)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
         }
 
         SoundEffect _SoundEffect;
@@ -91,7 +108,7 @@ namespace Nvs_Monitor
 
         private void DesktopAlertBase_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Common_Event.c_NVSEvent.WhenClickAlert(UserName, UserName);
+            Common_Event.c_NVSEvent.WhenClickAlert(FromUserName, Message_Info);
         }
     }
 }

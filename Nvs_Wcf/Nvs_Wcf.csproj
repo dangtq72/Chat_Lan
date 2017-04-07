@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Working\General\dll\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\app\lucy\product\11.2.0\client_1\odp.net\bin\4\Oracle.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="SendFiles">
       <HintPath>..\..\dll\SendFiles.dll</HintPath>
     </Reference>
@@ -58,12 +62,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppService\User_Friends_AS.cs" />
     <Compile Include="AppService\Nvs_Service.cs" />
     <Compile Include="AppService\CommonAS.cs" />
     <Compile Include="Business\Auto_Push_Data.cs" />
     <Compile Include="Business\CommonData.cs" />
     <Compile Include="Business\User_Interface.cs" />
     <Compile Include="Business\DBMemory.cs" />
+    <Compile Include="DataAccessLayer\Group_Users_DA.cs" />
+    <Compile Include="DataAccessLayer\User_Friends_DA.cs" />
+    <Compile Include="DataAccessLayer\UsersDA.cs" />
     <Compile Include="DataAccessLayer\AllCodeDA.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -72,6 +80,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\OracleHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

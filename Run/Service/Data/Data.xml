@@ -1,38 +1,73 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<USERS>
-  <USER>
-    <User_Name>Lucy</User_Name>
-    <Pass>123456</Pass>
-  	<Ip>192.168.2.222</Ip>
-	<Online_Status>0</Online_Status>
-	<Status>Hello Every Body</Status>
-  </USER>
-  <USER>
-    <User_Name>HungTD</User_Name>
-    <Pass>123456</Pass>
-  	<Ip>192.168.2.105</Ip>
-	<Online_Status>0</Online_Status>
-	<Status>Xuống tóc nào</Status>
-  </USER>
-  <USER>
-    <User_Name>HuongNT</User_Name>
-    <Pass>123456</Pass>
-  	<Ip>192.168.2.71</Ip>
-	<Online_Status>0</Online_Status>
-	<Status>Chán như con gián</Status>
-  </USER>
-  <USER>
-    <User_Name>DongHT</User_Name>
-    <Pass>123456</Pass>
-  	<Ip>192.168.2.71</Ip>
-	<Online_Status>0</Online_Status>
-	<Status>Chán như con gián</Status>
-  </USER>
-  <USER>
-    <User_Name>LaiLT</User_Name>
-    <Pass>123456</Pass>
-  	<Ip>192.168.2.71</Ip>
-	<Online_Status>0</Online_Status>
-	<Status>Chán như con gián</Status>
-  </USER>
-</USERS>
+<Data>
+	<USERS>
+	  <USER>
+		<User_Name>Lucy</User_Name>
+		<Pass>123456</Pass>
+		<Ip>192.168.2.222</Ip>
+		<Online_Status>0</Online_Status>
+		<Status>Hello Every Body</Status>
+		<IsGroup>0</IsGroup>
+	  </USER>
+	  <USER>
+		<User_Name>HungTD</User_Name>
+		<Pass>123456</Pass>
+		<Ip>192.168.2.105</Ip>
+		<Online_Status>0</Online_Status>
+		<Status>Xuống tóc nào</Status>
+		<IsGroup>0</IsGroup>
+	  </USER>
+	  <USER>
+		<User_Name>KiemNH</User_Name>
+		<Pass>123456</Pass>
+		<Ip>192.168.2.105</Ip>
+		<Online_Status>0</Online_Status>
+		<Status>Xuống tóc nào</Status>
+		<IsGroup>0</IsGroup>
+	  </USER>
+	  <USER>
+		<User_Name>SangDD</User_Name>
+		<Pass>123456</Pass>
+		<Ip>192.168.2.71</Ip>
+		<Online_Status>0</Online_Status>
+		<Status>Chán như con gián</Status>
+		<IsGroup>0</IsGroup>
+	  </USER>
+	  <USER>
+		<User_Name>DongHT</User_Name>
+		<Pass>123456</Pass>
+		<Ip>192.168.2.71</Ip>
+		<Online_Status>0</Online_Status>
+		<Status>Chán như con gián</Status>
+		<IsGroup>0</IsGroup>
+	  </USER>
+	  <USER>
+		<User_Name>ManTT8ChemGio</User_Name>
+		<Pass>123456</Pass>
+		<Ip>192.168.2.71</Ip>
+		<Online_Status>0</Online_Status>
+		<Status>Chán như con gián</Status>
+		<IsGroup>1</IsGroup>
+		<MEMBERS>
+			<MEMBER>
+				<NAME>Lucy</NAME>
+			</MEMBER>
+			<MEMBER>
+				<NAME>DongHT</NAME>
+			</MEMBER>
+			<MEMBER>
+				<NAME>KiemNH</NAME>
+			</MEMBER>
+			<MEMBER>
+				<NAME>SangDD</NAME>
+			</MEMBER>
+			<MEMBER>
+				<NAME>SangVV</NAME>
+			</MEMBER>
+			<MEMBER>
+				<NAME>HungTD</NAME>
+			</MEMBER>
+		</MEMBERS>
+	  </USER>
+	</USERS>
+</Data>

@@ -15,10 +15,7 @@ namespace ObjInfo
         public string User_Name { get; set; }
 
         [DataMember]
-        public string Pass { get; set; }
-
-        [DataMember]
-        public string Ip { get; set; }
+        public string Password { get; set; }
 
         int _Online_Status;
         [DataMember]
@@ -56,6 +53,22 @@ namespace ObjInfo
             }
         }
 
+        string _display;
+        [DataMember]
+        public string Display
+        {
+            get
+            {
+                return _display;
+            }
+            set
+            {
+                _display = value;
+            }
+        }
+
+        public List<Member_Info> List_Member { get; set; }
+
         Visibility _showimage_onilne = Visibility.Hidden;
         public Visibility ShowOnline
         {
@@ -76,6 +89,72 @@ namespace ObjInfo
             }
         }
 
+        int _IsGroup;
+        [DataMember]
+        public int IsGroup
+        {
+            get { return _IsGroup; }
+            set
+            {
+                if (_IsGroup != value)
+                {
+                    _IsGroup = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("IsGroup"));
+                    }
+                }
+            }
+        }
+
+       
         public event PropertyChangedEventHandler PropertyChanged;
     }
+
+    [DataContract]
+    public class Member_Info
+    {
+        [DataMember]
+        public string Member_Name { get; set; }
+    }
+
+    [DataContract]
+    public class Group_User_Info
+    {
+        [DataMember]
+        public decimal Group_Id { get; set; }
+
+        [DataMember]
+        public decimal User_Id { get; set; }
+
+        [DataMember]
+        public DateTime Joindate { get; set; }
+    }
+
+    [DataContract]
+    public class GroupsInfo
+    {
+        [DataMember]
+        public decimal Group_Id { get; set; }
+
+        [DataMember]
+        public string Group_Name { get; set; }
+
+        [DataMember]
+        public DateTime Createdate { get; set; }
+
+        [DataMember]
+        public string Notes { get; set; }
+    }
+
+    [DataContract]
+    public class User_Friends_Info
+    {
+        [DataMember]
+        public decimal User_Id { get; set; }
+
+        [DataMember]
+        public decimal User_Friend_Id { get; set; }
+    }
+
 }

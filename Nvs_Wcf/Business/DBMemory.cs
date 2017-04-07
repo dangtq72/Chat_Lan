@@ -38,7 +38,7 @@ namespace Nvs_Wcf
             {
                 if (c_dic_User_Interface.ContainsKey(p_UserName))
                 {
-                    if (c_dic_User_Interface[p_UserName].c_User_Info.Pass == p_PassWord)
+                    if (c_dic_User_Interface[p_UserName].c_User_Info.Password == p_PassWord)
                     {
                         return c_dic_User_Interface[p_UserName].c_User_Info;
                     }

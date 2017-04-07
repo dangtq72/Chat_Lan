@@ -25,13 +25,20 @@ namespace Nvs_Wcf
             {
                 NaviCommon.Common.log.Error("Bat dau khoi tao service ....");
 
-                CommonData.GetData();
+                if (CommonData.GetData())
+                {
 
-                serviceHost = new ServiceHost(typeof(NvsService));
-                serviceHost.Open();
-                lblStatus.Text = "Service Start";
-                lblStatus.ForeColor = System.Drawing.Color.Blue;
-                NaviCommon.Common.log.Error("Khoi tao service thanh cong ....");
+                    serviceHost = new ServiceHost(typeof(NvsService));
+                    serviceHost.Open();
+                    lblStatus.Text = "Service Start";
+                    lblStatus.ForeColor = System.Drawing.Color.Blue;
+                    NaviCommon.Common.log.Error("Khoi tao service thanh cong ....");
+                }
+                else
+                {
+                    lblStatus.Text = "Lỗi rồi";
+                    lblStatus.ForeColor = System.Drawing.Color.Red;
+                }
             }
             catch (Exception ex)
             {
