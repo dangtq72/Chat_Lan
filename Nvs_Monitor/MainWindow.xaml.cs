@@ -42,7 +42,12 @@ namespace Nvs_Monitor
 
         // lưu thông tin msg đã gửi đi
         Dictionary<string, List<Message_Info>> c_dic_Msg = new Dictionary<string, List<Message_Info>>();
-
+        
+        /// <summary>
+        /// Load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Show_Friend();
